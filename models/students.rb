@@ -22,15 +22,27 @@ student_data=SqlRunner.run(sql,values)
 end
 
 def delete()
-sql="DELETE FROM students WHERE id =$1"
-values=[@id]
-SqlRunner.run(sql,values)
+  sql="DELETE FROM students WHERE id =$1"
+  values=[@id]
+  SqlRunner.run(sql,values)
 end
 
 def self.delete_all()
-sql="DELETE FROM students"
-SqlRunner.run(sql)
+  sql="DELETE FROM students"
+  SqlRunner.run(sql)
 end
+
+def self.all()
+  sql="SELECT * FROM students"
+  student_data = SqlRunner.run(sql)
+  return Student.map_items(student_data)
+end
+
+def self.map_items(student_data)
+  result = student_data.map{|student| Student.new(student)}
+  return result
+end
+
 
 
 
