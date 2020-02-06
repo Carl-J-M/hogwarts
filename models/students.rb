@@ -38,6 +38,15 @@ def self.all()
   return Student.map_items(student_data)
 end
 
+def self.find(id)
+sql="SELECT * FROM students WHERE id=$1"
+values=[id]
+results=SqlRunner.run(sql,values)
+student_hash=results.first
+student= Student.new(student_hash)
+return student
+end
+
 def self.map_items(student_data)
   result = student_data.map{|student| Student.new(student)}
   return result
