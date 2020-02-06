@@ -1,4 +1,5 @@
 require_relative('../models/students')
+require( 'pry-byebug' )
 
 Student.delete_all()
 
@@ -49,3 +50,7 @@ student6 = Student.new({
   "age" => 20
 })
 student6.save()
+
+
+binding.pry
+nil
