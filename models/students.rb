@@ -12,4 +12,27 @@ class Student
     @house= options['house']
   end
 
+
+def save()
+  sql= "INSERT INTO students
+        (first_name,
+          last_name,
+          age,
+          house)
+          VALUES ($1,$2,$3,$4) RETURNING *"
+values=[@first_name,@last_name,@age,@house]
+student_data=SqlRunner.run(sql,values)
+@id=student_data.first()['id'].to_i
+end
+
+
+def self.delete_all()
+sql="DELETE FROM students WHERE id = $1"
+SqlRunner.run(sql)
+end
+
+
+
+
+
 end
