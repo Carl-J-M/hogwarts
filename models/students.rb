@@ -2,7 +2,7 @@ require_relative('../db/sql_runner')
 
 class Student
 
-  attr_reader :first_name, :last_name, :house, :age, :id
+  attr_accessor :first_name, :last_name, :house, :age, :id
 
   def initialize( options )
     @first_name = options['first_name']
@@ -25,6 +25,12 @@ def delete()
   sql="DELETE FROM students WHERE id =$1"
   values=[@id]
   SqlRunner.run(sql,values)
+end
+
+def update()
+sql="UPDATE students SET (first_name,last_name,age,house)=($1,$2,$3,$4) WHERE id=$5"
+values=[@first_name,@last_name,@age,@house,@id]
+SqlRunner.run(sql,values)
 end
 
 def self.delete_all()
